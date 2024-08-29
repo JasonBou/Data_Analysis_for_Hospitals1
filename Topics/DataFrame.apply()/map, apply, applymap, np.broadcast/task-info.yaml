@@ -1,0 +1,18 @@
+type: choice
+is_multiple_choice: true
+options:
+  - text: <code>.apply()</code> can't be used on a <code>Series</code>
+  - text: The output of the <code>np.broadcast()</code> function can only be a <code>Series</code>
+  - text: The output of the <code>np.broadcast()</code> function has the same shape
+      as original dataframe
+  - text: The <code>.map()</code> method cannot be used on a <code>DataFrame</code>
+  - text: <code>.applymap()</code> can only be used on columns
+  - text: The <code>.map()</code> method is applied element-wise
+files:
+  - name: main.py
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/29054#comment
+status: Solved
+record: -1
+local_check: false

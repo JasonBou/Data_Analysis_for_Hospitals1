@@ -1,0 +1,15 @@
+type: choice
+is_multiple_choice: true
+options:
+  - text: caffeine
+  - text: variety
+  - text: roast
+  - text: kind
+files:
+  - name: main.py
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/6672#comment
+status: Solved
+record: -1
+local_check: false

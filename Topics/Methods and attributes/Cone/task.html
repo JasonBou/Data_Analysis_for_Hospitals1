@@ -1,0 +1,27 @@
+<div class="step-text">
+<p>In what order should an object of the class <code class="language-python">Cone</code> call its methods so that everything is calculated and displayed correctly?</p>
+<pre><code class="language-python">class Cone:
+    PI = 3.14
+
+    def __init__(self, radius, height):
+        self.radius = radius
+        self.height = height
+        self.base_area = None
+        self.slant_height = None
+        self.surface_area = None
+        self.volume = None 
+
+    def get_base_area(self):
+        self.base_area = self.PI * (self.radius ** 2)
+
+    def get_parameters(self):
+        self.slant_height = math.sqrt((self.radius ** 2) + (self.height ** 2))
+        self.surface_area = self.PI * self.radius * self.slant_height
+        info = "Area of the base = {}\n".format(self.base_area)
+        info += "Volume = {}\n".format(self.volume)
+        info += "Surface area = {}".format(self.surface_area)
+        print(info)
+        
+    def get_volume(self):
+        self.volume = (1/3) * self.base_area * self.height</code></pre>
+</div>

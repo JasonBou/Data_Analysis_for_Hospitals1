@@ -1,0 +1,17 @@
+type: matching
+captions:
+  - Apply function to each row
+  - 'Apply function to each column '
+options:
+  - '<code>axis=1</code> '
+  - <code>axis=0</code>
+files:
+  - name: main.py
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/29051#comment
+status: Solved
+record: -1
+ordering:
+  - 0
+  - 1

@@ -1,0 +1,17 @@
+type: choice
+is_multiple_choice: false
+options:
+  - text: The shape of the dataframe.
+  - text: The number of samples (items/rows/columns) on which the apply method is already
+      executed.
+  - text: The number of samples (items/rows/columns) on which the apply method is not
+      executed.
+  - text: The number of rows on which the apply method is already executed.
+files:
+  - name: main.py
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/29056#comment
+status: Solved
+record: -1
+local_check: false

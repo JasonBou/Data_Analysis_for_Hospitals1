@@ -1,0 +1,16 @@
+type: choice
+is_multiple_choice: true
+options:
+  - text: Do nothing and proceed to train a model
+  - text: Drop columns with NaNs
+  - text: Drop rows that consist of more than half of missing values and fill remaining
+      NaNs with certain values
+  - text: Drop rows with NaNs
+files:
+  - name: main.py
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/14688#comment
+status: Solved
+record: -1
+local_check: false

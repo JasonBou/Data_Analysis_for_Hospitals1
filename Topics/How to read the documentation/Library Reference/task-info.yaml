@@ -1,0 +1,15 @@
+type: choice
+is_multiple_choice: false
+options:
+  - text: the capabilities of third-party Python libraries
+  - text: the syntax and "core semantics" of the language
+  - text: the capabilities of the standard Python libraries
+  - text: the installation of Python environment on different platforms
+files:
+  - name: main.py
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/12126#comment
+status: Solved
+record: -1
+local_check: false

@@ -1,0 +1,16 @@
+type: sorting
+options:
+  - get_base_area
+  - get_volume
+  - get_parameters
+files:
+  - name: main.py
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/6984#comment
+status: Solved
+record: -1
+ordering:
+  - 0
+  - 1
+  - 2

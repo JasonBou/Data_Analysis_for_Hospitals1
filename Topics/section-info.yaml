@@ -1,0 +1,27 @@
+content:
+  - Working with strings  basic methods
+  - Splitting strings and joining lists
+  - Escape sequences
+  - Sep and end arguments of print
+  - Class instances
+  - Comparisons
+  - Else statement
+  - Series
+  - DataFrame
+  - Combining Data in Pandas
+  - Accessing data in a DataFrame
+  - Modifying a DataFrame
+  - Lambda functions
+  - Methods and attributes
+  - Intro to NumPy
+  - Reading data in pandas
+  - .loc   .iloc
+  - Summarizing numeric columns
+  - Class
+  - How to read the documentation
+  - Grouping and aggregating data in pandas
+  - Working with missing values
+  - DataFrame.apply()
+  - Handling missing values
+  - Reshaping and Pivot Tables
+  - Summarizing categorical columns

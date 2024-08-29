@@ -1,0 +1,30 @@
+type: edu
+custom_name: Merge them!
+files:
+  - name: analysis.py
+    visible: true
+    learner_created: false
+  - name: test/__init__.py
+    visible: false
+    learner_created: false
+  - name: test/general.csv
+    visible: false
+    learner_created: false
+  - name: test/prenatal.csv
+    visible: false
+    learner_created: false
+  - name: test/sports.csv
+    visible: false
+    learner_created: false
+  - name: test/tests.py
+    visible: false
+    learner_created: false
+  - name: tests.py
+    visible: false
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/12047#comment
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Wed, 10 Jul 2024 14:24:32 UTC"
+record: 2

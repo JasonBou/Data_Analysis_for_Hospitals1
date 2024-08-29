@@ -1,0 +1,11 @@
+content:
+  - Theory
+  - Apply method with numpy function
+  - Use cases of apply method
+  - Apply method to rows and columns
+  - Types of functions
+  - "map, apply, applymap, np.broadcast"
+  - Use tqdm in pandas
+  - Apply method with a numpy function
+  - Apply to columns
+  - Apply method with reduce result_type

@@ -1,0 +1,18 @@
+type: sorting
+options:
+  - <code>deactivate</code>
+  - <code>python -m pip install nltk</code>
+  - <code>python3 -m venv my_venv</code>
+  - <code>my_venv\\Scripts\\activate.bat</code>
+files:
+  - name: main.py
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/22851#comment
+status: Solved
+record: -1
+ordering:
+  - 0
+  - 1
+  - 2
+  - 3

@@ -1,0 +1,130 @@
+<div class="step-text">
+<p><code class="language-python">pandas</code> dataframes are one of the most commonly used types of data format. However, we need to change our data in most situations. In this topic, you will learn how to transform <code class="language-python">pandas</code> dataframes with the <code class="language-python">.apply()</code> method. </p><h5 id="when-to-use-apply">When to use .apply()</h5><p>There are a lot of cases when you might need to change your data, and the <code class="language-python">.apply()</code> method is the perfect choice for it. Here are some of them:</p><ul><li><p>Transforming data: Apply various functions (e.g., root, sum, division, or custom formulas) to each element in the dataframe, clean the data (e.g., remove specific characters or replace missing values), or perform text preprocessing (e.g., tokenization, stemming, or lemmatization).</p></li><li><p>Feature engineering: Create new features by applying a function to columns.</p></li><li><p>Aggregating data: Aggregate data by applying a function to groups of rows or columns (summary statistics such as mean, median, or mode)</p></li></ul><h5 id="apply-on-rows-and-columns">.apply() on rows and columns</h5><p>Before we start, let's create a <code class="language-python">pandas</code> dataframe to use for all our future functions:</p><pre><code class="language-python">import pandas as pd
+
+df = pd.DataFrame({
+   'Name': ['John', 'Jane', 'Bob', 'Mary', 'Ivan'],
+   'City': ['New York', 'Los Angeles', 'Chicago', 'Houston', 'Moscow'],
+   'Age': [32, 25, 47, 19, 45],
+   'Income': [55000, 72000, 89000, 41000, 45000]
+})
+</code></pre><pre><code class="language-sql">   Name         City  Age  Income
+0  John     New York   32   55000
+1  Jane  Los Angeles   25   72000
+2   Bob      Chicago   47   89000
+3  Mary      Houston   19   41000
+4  Ivan      Moscow    45   45000
+</code></pre><p>The shape of our frame is (5, 4), as there are 5 rows and 4 columns. The <code class="language-python">.apply()</code> method can be used on both columns and rows.</p><p>To use <code class="language-python">.apply()</code> on rows, set <code class="language-python">axis = 1</code> (<code class="language-python">axis = 1</code> will apply the function to each row). You can change rows and create new columns with the <code class="language-python">.apply()</code> method. Let's first change all rows:</p><pre><code class="language-python">def change_row(row):
+    row['Name'] = row['Name'].upper()
+    row['City'] = row['City'].lower()
+    row['Age'] = row['Age'] + 10
+    row['Income'] = row['Income'] * 1.1
+    return row
+
+df = df.apply(change_row, axis=1)
+print(df)</code></pre><pre><code class="language-sql">   Name         City  Age   Income
+0  JOHN     new york   42  60500.0
+1  JANE  los angeles   35  79200.0
+2   BOB      chicago   57  97900.0
+3  MARY      houston   29  45100.0
+4  IVAN       moscow   55  49500.0</code></pre><p>Note that <code class="language-python">axis = 0</code> is the default parameter of the <code class="language-python">.apply()</code> method so you don't need to set it manually all the time. <code class="language-python">axis = 0</code> applies the function to each column in the dataframe.</p><p>In this function, we have changed all the rows. But you can also create a new column-based feature on the rows. For instance, let's create a tax column. </p><pre><code class="language-python">def add_tax(row):
+    if row['Income'] &gt; 60000:
+        tax = row['Income'] * 0.1
+    else:
+        tax = row['Income'] * 0.05
+    return tax
+
+df['Tax'] = df.apply(add_tax, axis=1)
+print(df)</code></pre><pre><code class="language-sql">   Name         City  Age   Income     Tax
+0  JOHN     new york   42  60500.0  6050.0
+1  JANE  los angeles   35  79200.0  7920.0
+2   BOB      chicago   57  97900.0  9790.0
+3  MARY      houston   29  45100.0  2255.0
+4  IVAN       moscow   55  49500.0  2475.0</code></pre><p>You can also use <code class="language-python">.apply()</code> on one column only without specifying it in your function. For instance, we can add <code class="language-python">_Smith</code> to all names in the <code class="language-python">Name</code> column. </p><pre><code class="language-python">def add_suffix(col, suffix):
+    return col + suffix
+
+# Apply the function to a single column
+df['Name'] = df['Name'].apply(add_suffix, suffix='_Smith')
+print(df)</code></pre><pre><code class="language-no-highlight">         Name         City  Age   Income     Tax
+0  JOHN_Smith     new york   42  60500.0  6050.0
+1  JANE_Smith  los angeles   35  79200.0  7920.0
+2   BOB_Smith      chicago   57  97900.0  9790.0
+3  MARY_Smith      houston   29  45100.0  2255.0
+4  IVAN_Smith       moscow   55  49500.0  2475.0</code></pre><p>You can also change a few columns:</p><pre><code class="language-python">def add_value(number):
+    return number + 100
+
+
+# Here, axis = 0 by default - thus, the function is applied to each column
+df[["Income", "Tax"]] = df[["Income", "Tax"]].apply(add_value)
+print(df)</code></pre><pre><code class="language-sql">         Name         City  Age   Income     Tax
+0  JOHN_Smith     new york   42  60600.0  6150.0
+1  JANE_Smith  los angeles   35  79300.0  8020.0
+2   BOB_Smith      chicago   57  98000.0  9890.0
+3  MARY_Smith      houston   29  45200.0  2355.0
+4  IVAN_Smith       moscow   55  49600.0  2575.0</code></pre><h5 id="types-of-functions-to-use-in-apply">Types of functions to use in .apply()</h5><p>In the examples above, we have created additional functions to be applied to rows and columns. In practice, you can use the <code class="language-python">.apply()</code> method with a wide range of different functions. Here are some of them:</p><ul><li><p>Built-in functions: you can use any built-in function in Python, such as <code class="language-python">max()</code>, <code class="language-python">min()</code>, <code class="language-python">len()</code>, <code class="language-python">sum()</code>, and so on. For example, you could use the <code class="language-python">max()</code> function to find the maximum value in a row:</p></li></ul><pre><code class="language-python">df_nums = pd.DataFrame({
+    'A': [1, 2, 3],
+    'B': [4, 5, 6],
+    'C': [7, 8, 9]
+})
+
+df_nums['MaxValue'] = df_nums.apply(max, axis=1)</code></pre><pre><code class="language-sql">    A  B  C  MaxValue
+ 0  1  4  7         7
+ 1  2  5  8         8
+ 2  3  6  9         9</code></pre><ul><li><p>Lambda functions: you can define a lambda function on the fly and use it in the <code class="language-python">.apply()</code> method. You can use the previously defined example with <code class="language-python">_Smith </code>prefix using only a lambda function.</p></li></ul><pre><code class="language-python">df['Name'] = df['Name'].apply(lambda x: x+'_Smith')</code></pre><pre><code class="language-sql">                Name         City  Age   Income     Tax
+ 0  JOHN_Smith_Smith     new york   42  60600.0  6150.0
+ 1  JANE_Smith_Smith  los angeles   35  79300.0  8020.0
+ 2   BOB_Smith_Smith      chicago   57  98000.0  9890.0
+ 3  MARY_Smith_Smith      houston   29  45200.0  2355.0
+ 4  IVAN_Smith_Smith       moscow   55  49600.0  2575.0</code></pre><ul><li><p>Custom functions: you can define and use your own functions and use them in the <code class="language-python">.apply()</code> method. We have done this in the previous example with rows and columns transformations. </p></li></ul><pre><code class="language-python">def calc_new_income(row):
+    return row['Income'] - row['Tax'] - 100
+
+df['Income_new'] = df.apply(calc_new_income, axis=1)</code></pre><pre><code class="language-sql">               Name         City  Age   Income     Tax  Income_new
+ 0  JOHN_Smith_Smith     new york   42  60600.0  6150.0     54350.0
+ 1  JANE_Smith_Smith  los angeles   35  79300.0  8020.0     71180.0
+ 2   BOB_Smith_Smith      chicago   57  98000.0  9890.0     88010.0
+ 3  MARY_Smith_Smith      houston   29  45200.0  2355.0     42745.0
+ 4  IVAN_Smith_Smith       moscow   55  49600.0  2575.0     46925.0</code></pre><ul><li><p>Numpy functions: you can also use any function from the <code class="language-python">NumPy</code> library. <code class="language-python">NumPy</code> provides a wide range of mathematical functions, such as <code class="language-python">sin()</code>, <code class="language-python">cos()</code>, <code class="language-python">sqrt()</code>, and you can use them as built-in functions. </p></li></ul><pre><code class="language-python">import numpy as np
+
+df['Tax_sqrt'] = df['Tax'].apply(np.sqrt)</code></pre><pre><code class="language-sql">               Name         City  Age   Income     Tax  Income_new   Tax_sqrt
+0  JOHN_Smith_Smith     new york   42  60600.0  6150.0     54350.0  78.421936
+1  JANE_Smith_Smith  los angeles   35  79300.0  8020.0     71180.0  89.554453
+2   BOB_Smith_Smith      chicago   57  98000.0  9890.0     88010.0  99.448479
+3  MARY_Smith_Smith      houston   29  45200.0  2355.0     42745.0  48.528342
+4  IVAN_Smith_Smith       moscow   55  49600.0  2575.0     46925.0  50.744458</code></pre><ul><li><p>Pandas functions: you can use other <code class="language-python">pandas</code> functions in the <code class="language-python">.apply()</code> method, such as <code class="language-python">isnull()</code>, <code class="language-python">to_numeric()</code>, and more. </p></li></ul><pre><code class="language-python">df['null_tax'] = df['Tax'].apply(pd.isnull)</code></pre><pre><code class="language-sql">      Tax  null_tax
+0  6150.0     False
+1  8020.0     False
+2  9890.0     False
+3  2355.0     False
+4  2575.0     False</code></pre><h5 id="the-result-type-parameter-of-apply">The result type parameter of .apply()</h5><p>Another important parameter of the <code class="language-python">.apply()</code> method is <code class="language-python">result_type</code>. It can be set as <code class="language-python">'expand'</code>, <code class="language-python">'reduce'</code>, or <code class="language-python">'broadcast'</code>. They produce different forms of the <code class="language-python">.apply()</code> method. </p><ul><li><p> <code class="language-python">'expand'</code> returns a <code class="language-python">DataFrame</code> or <code class="language-python">Series</code> containing the output of the applied function for each element of the input dataframe. That means we can create a whole new dataframe like in the example below.</p></li></ul><pre><code class="language-python">def calculate_tax(income, tax):
+    return pd.Series({'Tax rate': (income / tax) * 100, 'Tax rank': 10000 - tax})
+
+result_tax = df[['Income', 'Tax']].apply(lambda x: calculate_tax(*x), axis=1, result_type='expand')</code></pre><pre><code class="language-sql">       Tax rate  Tax rank
+ 0   985.365854    3850.0
+ 1   988.778055    1980.0
+ 2   990.899899     110.0
+ 3  1919.320594    7645.0
+ 4  1926.213592    7425.0</code></pre><ul><li><p><code class="language-python">'reduce'</code> returns a reduced single value of the output of the function applied to the rows or columns. You can use it on a new column or a bunch of features. </p></li></ul><pre><code class="language-python">def sum_row(row):
+    return row['Income'] + row['Tax']
+
+result_income_sum = df.apply(sum_row, result_type='reduce', axis=1)</code></pre><pre><code class="language-sql">
+ 0     66750.0
+ 1     87320.0
+ 2    107890.0
+ 3     47555.0
+ 4     52175.0</code></pre><ul><li><p><code class="language-python">'broadcast'</code> returns the frame of the original shape with the function applied to the rows or columns. This means that the result of the function is repeated for each element of the corresponding row or column. For example, we can set the mean tax and income for everyone. </p></li></ul><pre><code class="language-python">def mean_of_column(col):
+    return col.mean()
+
+result = df[['Income', 'Tax']].apply(mean_of_column, result_type='broadcast')</code></pre><pre><code class="language-sql">     Income     Tax
+ 0  66540.0  5798.0
+ 1  66540.0  5798.0
+ 2  66540.0  5798.0
+ 3  66540.0  5798.0
+ 4  66540.0  5798.0</code></pre><h5 id="apply-applymap-map-and-npbroadcast">.apply(), .applymap(), .map(), and np.broadcast()</h5><p>Apart from <code class="language-python">.apply()</code>, <code class="language-python">pandas</code> also has other methods such as <code class="language-python">.applymap()</code> and <code class="language-python">.map()</code>, and in Numpy, there is the <code class="language-python">broadcast()</code> function. Let's understand the differences between them. </p><ul><li><p><code class="language-python">.apply()</code> is used to apply a function to each row or column of a <code class="language-python">DataFrame</code> or <code class="language-python">Series</code><strong>.</strong> The result is a <code class="language-python">Series</code> or <code class="language-python">DataFrame</code> depending on the resulting shape.</p></li><li><p><code class="language-python">.applymap()</code> is used to apply a function element-wise to each value in a<strong> </strong><code class="language-python">DataFrame</code>. The result is a <code class="language-python">DataFrame</code> of the same shape.</p></li><li><p><code class="language-python">.map()</code> is used to apply a function element-wise to each value<strong> </strong>in a<strong> </strong><code class="language-python">Series</code>. The result is a <code class="language-python">Series</code> of the same shape.</p></li><li><p><code class="language-python">np.broadcast()</code> is used to apply a function to a <code class="language-python">DataFrame</code><strong> </strong>or <code class="language-python">Series</code><strong> </strong>and broadcast the result to the original shape. The result is a <code class="language-python">DataFrame</code><strong> </strong>or<strong> </strong><code class="language-python">Series</code> of the same shape. The function is similar to <code class="language-python">.apply()</code> with the <code class="language-python">result_type = 'broadcast'</code>.</p></li></ul><h5 id="check-the-progress-of-apply-with-the-tqdm-library">Check the progress of .apply() with the tqdm library</h5><p>In our examples so far, we have used small frames. However, sometimes we need to perform time-consuming operations. To view the progress of the results, you can use the <code class="language-python">tqdm</code> library. Here is how you install it:</p><pre><code class="language-shell">pip install tqdm</code></pre><p>You can also use <code class="language-python">tqdm</code> within each custom function. On the other hand, you can see the progress of any <code class="language-python">.apply()</code> method. To do this, import the library, set <code class="language-python">tqdm.pandas()</code>, and change <code class="language-python">.apply()</code> to <code class="language-python">.progress_apply()</code>. Our last example will look like this:</p><pre><code class="language-python">from tqdm import tqdm
+
+tqdm.pandas()
+
+result = df[['Income', 'Tax']].progress_apply(mean_of_column, result_type='broadcast')
+
+# here you will see this progress bar, we had two columns, so 2 is the number on the progress bar
+
+# 100%|██████████| 2/2 [00:00&lt;00:00, 1981.72it/s]</code></pre><h5 id="conclusion">Conclusion</h5><p>In this topic, we discussed the pandas <code class="language-python">.apply()</code> method and its various parameters. The <code class="language-python">.apply()</code> method allows you to apply a function to a <code class="language-python">DataFrame</code> or <code class="language-python">Series</code> in order to transform or manipulate the data. It's a flexible tool you can use with a wide range of input functions and parameters to control the output format. </p>
+</div>

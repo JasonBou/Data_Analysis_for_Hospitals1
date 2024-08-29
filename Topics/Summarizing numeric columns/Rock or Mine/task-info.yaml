@@ -1,0 +1,24 @@
+type: dataset
+custom_name: Rock or Mine?
+files:
+  - name: main.py
+    visible: true
+    learner_created: false
+  - name: data/sample/input.txt
+    visible: true
+    learner_created: false
+  - name: data/dataset/moon.txt
+    visible: true
+    learner_created: true
+  - name: data/dataset/moon2.txt
+    visible: true
+    learner_created: true
+  - name: data/dataset/input.txt
+    visible: true
+    learner_created: true
+feedback_link: https://hyperskill.org/learn/step/13366#comment
+status: Solved
+feedback:
+  message: <html>It seems the difference between rock and mine objects is quite obvious...</html>
+  time: "Sat, 17 Aug 2024 10:31:39 UTC"
+record: -1

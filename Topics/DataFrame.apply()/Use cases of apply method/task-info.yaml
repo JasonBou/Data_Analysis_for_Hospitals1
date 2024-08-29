@@ -1,0 +1,19 @@
+type: choice
+is_multiple_choice: true
+options:
+  - text: Data creation
+  - text: Data aggregation
+  - text: Data formating
+  - text: Feature engineering
+  - text: Feature deleting
+  - text: Data cleaning
+  - text: Text processing
+  - text: Text generation
+files:
+  - name: main.py
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/29050#comment
+status: Solved
+record: -1
+local_check: false

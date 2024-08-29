@@ -1,0 +1,20 @@
+type: matching
+captions:
+  - condition
+  - first alternative
+  - second alternative
+options:
+  - print(True)
+  - print(False)
+  - x &gt;= 0
+files:
+  - name: main.py
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/5935#comment
+status: Solved
+record: -1
+ordering:
+  - 0
+  - 1
+  - 2

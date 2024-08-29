@@ -1,0 +1,26 @@
+type: matching
+captions:
+  - Lambda function
+  - Numpy function
+  - Pandas function
+  - Custom function
+  - Built-in function
+options:
+  - <code>df.apply(np.max)</code>
+  - "<code>df.apply(clean_text, axis=1)</code>"
+  - "<code>df['one_column'].map({'A': 'B', 'B':'C'})</code>"
+  - "<code>df.apply(min, axis=1)</code>"
+  - "<code>df.apply(lambda x: x.lower())</code>"
+files:
+  - name: main.py
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/29052#comment
+status: Solved
+record: -1
+ordering:
+  - 0
+  - 1
+  - 2
+  - 3
+  - 4

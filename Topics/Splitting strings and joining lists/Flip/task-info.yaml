@@ -1,0 +1,30 @@
+type: code
+files:
+  - name: main.py
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/9466#comment
+status: Failed
+feedback:
+  message: |
+    Failed test #1 of 12. Runtime error
+
+    This is a sample test from the problem statement!
+
+    Test input:
+    1 22 3
+    Correct output:
+    3 22 1
+
+    Your code output:
+
+
+    Error:
+    Traceback (most recent call last):
+      File "/sandbox/main.py", line 3, in <module>
+        print(' '.split(num))
+              ^^^^^^^^^^^^^^
+    TypeError: must be str or None, not list
+  time: "Thu, 04 Jul 2024 21:14:13 UTC"
+record: -1
+submission_language: python3
